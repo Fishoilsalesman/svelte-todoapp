@@ -1,30 +1,29 @@
 <script>
-	export let name;
-</script>
+	import AddTodoForm from "./components/AddTodo.svelte";
+	import TodoList from "./components/TodoList.svelte";
 
-<main>
-	<h1>Hello {name}!</h1>
-	<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
-</main>
+	let todos = [
+		{
+			id: 1,
+			todo: "Clean room",
+			due: "2020-10-8",
+		},
+	];
+
+	const addTodo = (e) => {
+		let newTodo = e.detail;
+		todos = [newTodo, ...todos];
+	};
+</script>
 
 <style>
 	main {
-		text-align: center;
-		padding: 1em;
-		max-width: 240px;
+		max-width: 600px;
 		margin: 0 auto;
 	}
-
-	h1 {
-		color: #ff3e00;
-		text-transform: uppercase;
-		font-size: 4em;
-		font-weight: 100;
-	}
-
-	@media (min-width: 640px) {
-		main {
-			max-width: none;
-		}
-	}
 </style>
+
+<AddTodoForm on:addTodo={addTodo} />
+<main>
+	<TodoList {todos} />
+</main>
