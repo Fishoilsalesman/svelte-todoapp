@@ -14,6 +14,11 @@
 		let newTodo = e.detail;
 		todos = [newTodo, ...todos];
 	};
+
+	const deleteTodo = (e) => {
+		let id = e.detail;	
+		todos = todos.filter((x) => x.id !== id);
+	};
 </script>
 
 <style>
@@ -25,5 +30,5 @@
 
 <AddTodoForm on:addTodo={addTodo} />
 <main>
-	<TodoList {todos} />
+	<TodoList {todos} on:deleteTodo={deleteTodo} />
 </main>
