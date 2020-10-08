@@ -62,5 +62,5 @@
   <div class="error">{errors.todo}</div>
   <input type="date" bind:value={todo.due} />
   <div class="error">{errors.due}</div>
-  <button>Update</button>
+  <button>Save</button>
 </form>

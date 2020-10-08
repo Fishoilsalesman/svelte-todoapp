@@ -31,7 +31,7 @@
         due: fields.due,
       };
 
-      dispatch('addTodo', todo);
+      dispatch("addTodo", todo);
 
       fields = { todo: "", due: "" };
     }
@@ -40,24 +40,27 @@
 
 <style>
   form {
-    width: 400px;
-    margin: 0 auto;
-    text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;    
+    padding-top: 40px;
   }
   .form-field {
-    margin: 18px auto;
+    margin: 5px 10px;
+  }
+  input#todo {
+    width: 400px;
+  }
+  input#due {
+    width: 150px;
   }
   input {
-    width: 100%;
     border-radius: 6px;
-  }
-  label {
-    margin: 10px auto;
-    text-align: left;
   }
   .error {
     color: red;
     margin-bottom: 5px;
+    margin-left: 5px;
   }
   button {
     border: 0;
@@ -67,25 +70,21 @@
     background: rgb(113, 202, 113);
     border-radius: 6px;
     color: white;
-    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.4);
-    margin-top: 10px;
   }
 </style>
 
 <form on:submit|preventDefault={handleSubmit}>
   <div class="form-field">
-    <label for="todo" />
     <input
       type="text"
       id="todo"
       bind:value={fields.todo}
       placeholder="Todo..." />
     <div class="error">{errors.todo}</div>
+  </div>
   <div class="form-field">
-    <label for="due" />
     <input type="date" bind:value={fields.due} id="due" />
     <div class="error">{errors.due}</div>
   </div>
-    <button>Add Todo</button>
-  </div>
+  <div class="form-field"><button>Add Todo</button></div>
 </form>
