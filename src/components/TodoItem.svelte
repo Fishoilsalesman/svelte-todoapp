@@ -30,9 +30,16 @@
     border-radius: 8px;
     font-weight: bold;
     color: white;
+    cursor: pointer;
+  }
+  button.delete {    
     background: crimson;
     padding: 5px 10px;
-    cursor: pointer;
+    
+  }
+  button.edit {    
+    background: rgb(236, 221, 6);
+    padding: 5px 20px;   
   }
 </style>
 
@@ -41,9 +48,18 @@
     <p>{todo.todo}</p>
     <p class="due">{todo.due}</p>
   </div>
-
-  <button
-    on:click={() => {
-      dispatch('deleteTodo', todo.id);
-    }}>X</button>
+  <div>
+    <button
+      class="edit"
+      on:click={() => {
+        dispatch('editTodo', todo);
+      }}>
+      Edit
+    </button>
+    <button
+      class="delete"
+      on:click={() => {
+        dispatch('deleteTodo', todo.id);
+      }}>X</button>
+  </div>
 </div>

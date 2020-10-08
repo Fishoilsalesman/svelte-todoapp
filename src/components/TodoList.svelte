@@ -9,6 +9,6 @@
 
 <div>
   {#each todos as todo (todo.id)}
-    <TodoItem {todo} on:deleteTodo />
+    <TodoItem {todo} on:deleteTodo on:editTodo />
   {/each}
 </div>
