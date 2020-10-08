@@ -1,4 +1,5 @@
 <script>
+	import { onMount } from "svelte";
 	import AddTodoForm from "./components/AddTodo.svelte";
 	import TodoList from "./components/TodoList.svelte";
 	import Modal from "./components/Modal.svelte";
@@ -7,13 +8,15 @@
 	let showModal = false;
 	let selectedTodo = {};
 
-	let todos = [
-		{
-			id: 1,
-			todo: "Clean room",
-			due: "2020-10-8",
-		},
-	];
+	let todos = [];
+
+	onMount(async () => {
+		todos = JSON.parse(localStorage.getItem("todos"));
+	});
+
+	const saveTodos = () => {
+		localStorage.setItem("todos", JSON.stringify(todos));
+	};
 
 	const toggleModal = () => {
 		showModal = !showModal;
@@ -22,11 +25,13 @@
 	const addTodo = (e) => {
 		let newTodo = e.detail;
 		todos = [newTodo, ...todos];
+		saveTodos();
 	};
 
 	const deleteTodo = (e) => {
 		let id = e.detail;
 		todos = todos.filter((x) => x.id !== id);
+		saveTodos();
 	};
 
 	const editTodo = (e) => {
@@ -38,10 +43,10 @@
 	const handleUpdateTodo = (e) => {
 		let updatedTodo = e.detail;
 
-		let objIndex = todos.findIndex(obj => obj.id == updatedTodo.id);
+		let objIndex = todos.findIndex((obj) => obj.id == updatedTodo.id);
 		todos[objIndex].todo = updatedTodo.todo;
 		todos[objIndex].due = updatedTodo.due;
-		
+		saveTodos();
 
 		showModal = false;
 	};
